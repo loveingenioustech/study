@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="0" skipped="0" tests="1" time="0.64" failures="0" name="com.jgeppert.examples.actions.HelloActionTest">
+  <properties>
+    <property value="Java(TM) 2 Runtime Environment, Standard Edition" name="java.runtime.name"/>
+    <property value="C:\Dev\Java\jdk1.5.0_22\jre\bin" name="sun.boot.library.path"/>
+    <property value="1.5.0_22-b03" name="java.vm.version"/>
+    <property value="Sun Microsystems Inc." name="java.vm.vendor"/>
+    <property value="http://java.sun.com/" name="java.vendor.url"/>
+    <property value=";" name="path.separator"/>
+    <property value="true" name="guice.disable.misplaced.annotation.check"/>
+    <property value="Java HotSpot(TM) Client VM" name="java.vm.name"/>
+    <property value="sun.io" name="file.encoding.pkg"/>
+    <property value="US" name="user.country"/>
+    <property value="SUN_STANDARD" name="sun.java.launcher"/>
+    <property value="Service Pack 3" name="sun.os.patch.level"/>
+    <property value="Java Virtual Machine Specification" name="java.vm.specification.name"/>
+    <property value="C:\Dev\Workspace\struts2-example" name="user.dir"/>
+    <property value="1.5.0_22-b03" name="java.runtime.version"/>
+    <property value="sun.awt.Win32GraphicsEnvironment" name="java.awt.graphicsenv"/>
+    <property value="C:\Dev\Java\jdk1.5.0_22\jre\lib\endorsed" name="java.endorsed.dirs"/>
+    <property value="x86" name="os.arch"/>
+    <property value="C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\" name="java.io.tmpdir"/>
+    <property value="
+" name="line.separator"/>
+    <property value="Sun Microsystems Inc." name="java.vm.specification.vendor"/>
+    <property value="" name="user.variant"/>
+    <property value="Windows XP" name="os.name"/>
+    <property value="C:\Dev\apache-maven-3.0.4\bin\..\bin\m2.conf" name="classworlds.conf"/>
+    <property value="Cp1252" name="sun.jnu.encoding"/>
+    <property value="C:\Dev\Java\jdk1.5.0_22\bin;.;C:\WINDOWS\system32;C:\WINDOWS;C:\Dev\Oracle\app\oracle\product\11.2.0\server\bin;;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\IBM\Infoprint Select;C:\Notes;C:\Program Files\XLView;C:\lotus\compnent;C:\Utilities;C:\Program Files\Common Files\Lenovo;C:\Program Files\IBM\Personal Communications\;C:\Program Files\IBM\Trace Facility\;C:\Program Files\ThinkPad\ConnectUtilities;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Dev\WinMerge;C:\Dev\Java\jdk1.5.0_22\bin;C:\Dev\PortableGit-1.7.9-preview20120201\bin;C:\Dev\apache-maven-3.0.4\bin;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\" name="java.library.path"/>
+    <property value="Java Platform API Specification" name="java.specification.name"/>
+    <property value="49.0" name="java.class.version"/>
+    <property value="HotSpot Client Compiler" name="sun.management.compiler"/>
+    <property value="5.1" name="os.version"/>
+    <property value="C:\Documents and Settings\Administrator" name="user.home"/>
+    <property value="Asia/Shanghai" name="user.timezone"/>
+    <property value="sun.awt.windows.WPrinterJob" name="java.awt.printerjob"/>
+    <property value="Cp1252" name="file.encoding"/>
+    <property value="1.5" name="java.specification.version"/>
+    <property value="binlong" name="user.name"/>
+    <property value="C:\Dev\apache-maven-3.0.4\bin\..\boot\plexus-classworlds-2.4.jar" name="java.class.path"/>
+    <property value="1.0" name="java.vm.specification.version"/>
+    <property value="32" name="sun.arch.data.model"/>
+    <property value="C:\Dev\Java\jdk1.5.0_22\jre" name="java.home"/>
+    <property value="Sun Microsystems Inc." name="java.specification.vendor"/>
+    <property value="en" name="user.language"/>
+    <property value="sun.awt.windows.WToolkit" name="awt.toolkit"/>
+    <property value="mixed mode, sharing" name="java.vm.info"/>
+    <property value="1.5.0_22" name="java.version"/>
+    <property value="C:\Dev\Java\jdk1.5.0_22\jre\lib\ext" name="java.ext.dirs"/>
+    <property value="C:\Dev\Java\jdk1.5.0_22\jre\lib\rt.jar;C:\Dev\Java\jdk1.5.0_22\jre\lib\i18n.jar;C:\Dev\Java\jdk1.5.0_22\jre\lib\sunrsasign.jar;C:\Dev\Java\jdk1.5.0_22\jre\lib\jsse.jar;C:\Dev\Java\jdk1.5.0_22\jre\lib\jce.jar;C:\Dev\Java\jdk1.5.0_22\jre\lib\charsets.jar;C:\Dev\Java\jdk1.5.0_22\jre\classes" name="sun.boot.class.path"/>
+    <property value="Sun Microsystems Inc." name="java.vendor"/>
+    <property value="C:\Dev\apache-maven-3.0.4\bin\.." name="maven.home"/>
+    <property value="\" name="file.separator"/>
+    <property value="http://java.sun.com/cgi-bin/bugreport.cgi" name="java.vendor.url.bug"/>
+    <property value="little" name="sun.cpu.endian"/>
+    <property value="UnicodeLittle" name="sun.io.unicode.encoding"/>
+    <property value="windows" name="sun.desktop"/>
+    <property value="pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86" name="sun.cpu.isalist"/>
+  </properties>
+  <testcase classname="com.jgeppert.examples.actions.HelloActionTest" time="0.593" name="testHelloAction"/>
+</testsuite>
