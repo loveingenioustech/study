@@ -1,0 +1,4 @@
+java searching.BinarySearch data/tinyW.txt < data/tinyT.txt
+
+
+
