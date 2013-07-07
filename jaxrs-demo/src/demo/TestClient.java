@@ -26,7 +26,7 @@ public class TestClient {
 	}
 
 	private static URI getBaseURI() {
-		return UriBuilder.fromUri("http://localhost:8080/jaxrs").build();
+		return UriBuilder.fromUri("http://localhost:8080/jaxrs-demo/").build();
 	}
 
 }
