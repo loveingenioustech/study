@@ -1,4 +1,5 @@
 java searching.BinarySearch data/tinyW.txt < data/tinyT.txt
 
+java basic.RandomSeq 10 100.0 200.0
 
 
