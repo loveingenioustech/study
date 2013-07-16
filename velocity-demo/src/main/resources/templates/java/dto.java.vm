@@ -1,0 +1,67 @@
+#parse( "common/header.include.vm" )
+package $package;
+
+import java.io.Serializable;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+/**
+ * @author Robin Long
+ */
+public class $dtoClassName
+#if ($extendsClass)
+    extends $extendsClass
+#end
+    implements Serializable
+#if ($implementsClasses)
+    #foreach( $implements in $implementsClasses )$implements #end
+#end
+{
+	/**
+	 * Version UID.
+	 */
+	private static final long serialVersionUID = 1L;
+
+#set ( $columns = $table.getColumns() )	
+
+#foreach ( $column in $columns )
+	/**
+	 * $column.getName()
+	 */
+    private $column.getJavaDataType() $column.getName().toLowerCase() = null;
+#end
+
+    public $dtoClassName() {}
+
+	public $dtoClassName($table.getConstructorArgs()) {
+		#foreach ( $column in $columns )
+			this.$column.getName().toLowerCase() = $column.getName().toLowerCase();
+		#end	
+	}
+
+
+#foreach ( $column in $columns )
+    /**
+     * @return the $column.getName().toLowerCase()
+     */
+    public $column.getJavaDataType() $column.getGetMethod()()
+    {
+        return this.$column.getName().toLowerCase();
+    }
+
+    /**
+     * @param $column.getName().toLowerCase() 
+     * 						the $column.getName().toLowerCase() to set
+     */
+    public void $column.getSetMethod()(final $column.getJavaDataType() $column.getName().toLowerCase())
+    {
+		this.$column.getName().toLowerCase() = $column.getName().toLowerCase();
+    }
+#end
+
+	public String toString()
+	{
+		return $table.getToStringChain();
+	    ##return new ToStringBuilder(this).appendSuper(super.toString()).toString();
+	}
+}
