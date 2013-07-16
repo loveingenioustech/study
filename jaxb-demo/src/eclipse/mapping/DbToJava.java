@@ -66,19 +66,19 @@ public class DbToJava {
 		List<Key> keyList = null;
 		ResultSet rs = null;
 
-		System.out.println("Table:" + tableName);
 		try {
 			Connection conn = DBUtil.getDBConnection(schema);
 
 			DatabaseMetaData md = conn.getMetaData();
-			rs = md.getColumns(null, md.getUserName(), tableName, "%");
+			rs = md.getColumns(null, md.getUserName(), tableName.toUpperCase(),
+					"%");
 
 			colList = new ArrayList<Column>();
 			Column col = null;
 			while (rs.next()) {
 				col = new Column();
 				col.setName(rs.getString("COLUMN_NAME"));
-				col.setType(rs.getString("TYPE_NAME"));
+				col.setSqlDataType(rs.getString("TYPE_NAME"));
 				col.setNullAble(rs.getInt("NULLABLE") == 1);
 				col.setSize(rs.getInt("COLUMN_SIZE"));
 				col.setDecimalDigits(rs.getInt("DECIMAL_DIGITS"));
@@ -87,15 +87,26 @@ public class DbToJava {
 			}
 
 			rs = md.getPrimaryKeys(null, md.getUserName(), tableName);
-			keyList = new ArrayList<Key>();
-			Key key = null;
+
 			while (rs.next()) {
-				key = new Key();
-				key.setColumnName(rs.getString("COLUMN_NAME"));
-				key.setKeySeq(rs.getShort("KEY_SEQ"));
-				key.setPkName(rs.getString("PK_NAME"));
-				keyList.add(key);
+				for (Column c : colList) {
+					if (c.getName().equals(rs.getString("COLUMN_NAME"))) {
+						c.setKeySequence(rs.getShort("KEY_SEQ"));
+						continue;
+					}
+				}
 			}
+
+			// rs = md.getPrimaryKeys(null, md.getUserName(), tableName);
+			// keyList = new ArrayList<Key>();
+			// Key key = null;
+			// while (rs.next()) {
+			// key = new Key();
+			// key.setColumnName(rs.getString("COLUMN_NAME"));
+			// key.setKeySeq(rs.getShort("KEY_SEQ"));
+			// key.setPkName(rs.getString("PK_NAME"));
+			// keyList.add(key);
+			// }
 
 			table = new Table();
 			table.setName(tableName);
@@ -104,9 +115,9 @@ public class DbToJava {
 				table.setColumns(colList);
 			}
 
-			if (keyList != null && keyList.size() > 0) {
-				table.setKeies(keyList);
-			}
+//			if (keyList != null && keyList.size() > 0) {
+//				table.setKeies(keyList);
+//			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();

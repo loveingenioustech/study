@@ -18,13 +18,17 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.PropertyException;
 
+import ns.HbmNamespaceMapper;
+import type.JDBCToHibernateTypeHelper;
+
 import com.sun.xml.bind.marshaller.CharacterEscapeHandler;
 
 import db.Column;
 import db.Table;
 
-public class JavaToHbm {
-	public void marshalXMLDocument(File xmlDocument) {
+public class DbToHbm {
+	public void marshalXMLDocument(String tableName, String className,
+			File xmlDocument) {
 		try {
 			JAXBContext jaxbContext = JAXBContext
 					.newInstance(HibernateMapping.class);
@@ -33,7 +37,7 @@ public class JavaToHbm {
 					Boolean.valueOf(true));
 
 			String declaration = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n";
-			String docType = "<!DOCTYPE hibernate-mapping PUBLIC \r\n \"-//Hibernate/Hibernate Mapping DTD 3.0//EN\" \r\n \"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd\">\r\n";
+			String docType = "<!DOCTYPE hibernate-mapping PUBLIC \"-//Hibernate/Hibernate Mapping DTD 3.0//EN\" \r\n \"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd\">\r\n";
 
 			marshaller.setProperty("jaxb.encoding", "UTF-8");
 			marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
@@ -51,16 +55,20 @@ public class JavaToHbm {
 
 					});
 
+			//com.sun.xml.bind.namespacePrefixMapper
+			//com.sun.xml.internal.bind.namespacePrefixMapper
+			marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper",
+					new HbmNamespaceMapper());
+
 			HibernateMapping hbm = new HibernateMapping();
 			List<Object> clazz = new ArrayList();
 
 			hbm.Class mappingClass = new hbm.Class();
 
-			String tableName = "EVENT";
 			DbToJava db2XML = new DbToJava();
 			Table eventTable = db2XML.reverseTable(tableName);
 
-			mappingClass.setName("dto.Event");
+			mappingClass.setName(className);
 			mappingClass.setTable(eventTable.getName());
 
 			List<Object> properties = new ArrayList();
@@ -71,35 +79,36 @@ public class JavaToHbm {
 				ce = new ColumnElement();
 
 				p.setName(c.getName());
-				p.setType(c.getType());
+				p.setType(JDBCToHibernateTypeHelper
+						.translateOracleTypeToHibernate(c.getSqlDataType()));
 
 				ce.setName(c.getName());
 				ce.setLength(String.valueOf(c.getSize()));
-				ce.setPrecision(String.valueOf(c.getDecimalDigits()));
+				if (c.getDecimalDigits() != 0) {
+					ce.setPrecision(String.valueOf(c.getDecimalDigits()));
+				}
 
 				p.getColumnElementOrFormulaElement().add(ce);
 				properties.add(p);
-			}			
+			}
 
 			mappingClass.getPropertyOrManyToOneOrOneToOne().addAll(properties);
 
 			clazz.add(mappingClass);
-
-			List<Object> queryOrSqlQuery = new ArrayList();
-			Query query1 = new Query();
-			query1.setName("hqlGetEventById");
-			// query1.setContent("<![CDTATA[from Event as e where e.id = :id]]>");
-			query1.setContent("from Event as e where e.id = :id");
-			queryOrSqlQuery.add(query1);
-
 			hbm.setClazzOrSubclassOrJoinedSubclass(clazz);
-			hbm.setQueryOrSqlQuery(queryOrSqlQuery);
+
+			// List<Object> queryOrSqlQuery = new ArrayList();
+			// Query query1 = new Query();
+			// query1.setName("hqlGetEventById");
+			// query1.setContent("<![CDTATA[from Event as e where e.id = :id]]>");
+			// query1.setContent("from Event as e where e.id = :id");
+			// queryOrSqlQuery.add(query1);
+			// hbm.setQueryOrSqlQuery(queryOrSqlQuery);
 
 			FileOutputStream fos = new FileOutputStream(xmlDocument);
 			OutputStreamWriter out = new OutputStreamWriter(fos, "UTF-8");
 			out.write(declaration);
 			out.write(docType);
-			// marshaller.marshal(hbm, new OutputStreamWriter(fos, "UTF-8"));
 			marshaller.marshal(hbm, out);
 		} catch (IOException e) {
 			System.err.println(e.toString());
@@ -111,8 +120,12 @@ public class JavaToHbm {
 	}
 
 	public static void main(String[] argv) {
+		String tableName = "EVENT";
+		String className = "dto.Event";
 		String xmlDocument = "src/event.hbm.xml";
-		JavaToHbm javaToHbm = new JavaToHbm();
-		javaToHbm.marshalXMLDocument(new File(xmlDocument));
+
+		DbToHbm javaToHbm = new DbToHbm();
+		javaToHbm.marshalXMLDocument(tableName, className,
+				new File(xmlDocument));
 	}
 }

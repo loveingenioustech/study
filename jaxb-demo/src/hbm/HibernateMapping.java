@@ -11,10 +11,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = { "clazzOrSubclassOrJoinedSubclass", "queryOrSqlQuery" })
-@XmlRootElement(name = "hibernate-mapping")
+@XmlType(name = "", propOrder = { "clazzOrSubclassOrJoinedSubclass",
+		"queryOrSqlQuery" })
+@XmlRootElement(name = "hibernate-mapping", namespace = "")
 public class HibernateMapping {
-	
+
 	@XmlElements({ @XmlElement(name = "class", type = Class.class), })
 	protected List<Object> clazzOrSubclassOrJoinedSubclass;
 
@@ -25,12 +26,12 @@ public class HibernateMapping {
 	public HibernateMapping() {
 	}
 
-    public List<Object> getClazzOrSubclassOrJoinedSubclass() {
-        if (clazzOrSubclassOrJoinedSubclass == null) {
-            clazzOrSubclassOrJoinedSubclass = new ArrayList<Object>();
-        }
-        return this.clazzOrSubclassOrJoinedSubclass;
-    }    
+	public List<Object> getClazzOrSubclassOrJoinedSubclass() {
+		if (clazzOrSubclassOrJoinedSubclass == null) {
+			clazzOrSubclassOrJoinedSubclass = new ArrayList<Object>();
+		}
+		return this.clazzOrSubclassOrJoinedSubclass;
+	}
 
 	public void setClazzOrSubclassOrJoinedSubclass(
 			List<Object> clazzOrSubclassOrJoinedSubclass) {

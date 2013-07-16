@@ -1,5 +1,6 @@
 package db;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -7,7 +8,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 public class Table {
 	private String name;
 
-	private List<Key> keies;
+	private List<Column> keies;
 
 	private List<Column> columns;
 
@@ -35,12 +36,14 @@ public class Table {
 		this.columns = columns;
 	}
 
-	public List<Key> getKeies() {
-		return keies;
-	}
+	public List<Column> getKeies() {
+		List<Column> result = new LinkedList<Column>();
 
-	public void setKeies(List<Key> keies) {
-		this.keies = keies;
+		for (Column col : getColumns())
+			if (col.isPrimaryKey())
+				result.add(col);
+
+		return result;
 	}
 
 	@Override
