@@ -1,7 +1,7 @@
 package thread;
 
-/*
- * 
+/**
+ 
  With volatile keyword
  Incrementing MY_INT to: 1
  Got Change for MY_INT : 1
@@ -38,8 +38,7 @@ package thread;
  My example has big chances to show mainly because the ChangeListener thread is busy, thanks to the loop, and the JVM consider that this thread has no time for updating the local variables. 
  Executing some synchronized methods or adding an other variable which is volatile (or even executing some simple lines of code) could modify the JVM behavior and "correct" this problem...
 
- * 
- * 
+
  * 
  */
 public class TestVolatile {
