@@ -1,5 +1,8 @@
 <root>
   <facet id="jpt.jaxb">
+    <node name="classgen">
+      <attribute name="package" value="kepler.hibernate3"/>
+    </node>
     <node name="libprov">
       <attribute name="provider-id" value="jaxb-user-library-provider"/>
     </node>

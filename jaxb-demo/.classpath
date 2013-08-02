@@ -6,10 +6,9 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/EclipseLink 2.4.1 - Juno">
-		<attributes>
-			<attribute name="owner.project.facets" value="jpt.jaxb"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="lib" path="jar/commons-lang3-3.1.jar"/>
+	<classpathentry kind="lib" path="jar/ojdbc14.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/EclipseLink 2.5.0 - Kepler"/>
+	<classpathentry kind="lib" path="jar/jaxb-impl.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
