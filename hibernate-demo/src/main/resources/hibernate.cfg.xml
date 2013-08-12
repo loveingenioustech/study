@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory name="demo">
+		<property name="connection.driver_class">oracle.jdbc.Driver</property>
+		<!--  
+		<property name="connection.url">jdbc:oracle:thin:@localhost:1521:orcl</property>
+		-->
+		<property name="hibernate.connection.datasource">java:/comp/env/jdbc/DemoDB</property>
+		<!--  
+		<property name="hibernate.transaction.factory_class">org.hibernate.transaction.JTATransactionFactory</property>
+		<property name="connection.username">study</property>
+		<property name="connection.password">study</property>
+		-->
+		<property name="hibernate.transaction.flush_before_completion">true</property>
+		<property name="hibernate.transaction.auto_close_session">true</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.cache.use_second_level_cache">false</property>
+
+		<!--<property name="hbm2ddl.auto">create</property> -->
+
+		<mapping resource="demo/hbm/Event.hbm.xml" />
+	</session-factory>
+</hibernate-configuration>
