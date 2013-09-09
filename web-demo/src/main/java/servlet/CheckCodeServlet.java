@@ -42,6 +42,8 @@ public class CheckCodeServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		response.setContentType("image/jpeg");
 		ServletOutputStream sos = response.getOutputStream();
+		
+		// Cache setting
 		response.setHeader("Pragma", "No-cache");
 		response.setHeader("Cache-Control", "no-cache");
 		response.setDateHeader("Expires", 0);
