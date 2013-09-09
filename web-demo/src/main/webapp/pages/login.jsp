@@ -8,11 +8,14 @@
 <title>Login</title>
 </head>
 <body>
-	<form action="${pageContext.request.contextPath}/LogonFormServlet" method="post">
-		User Name:<input type="text" name="username"><br>
-		Password:<input type="password" name="pwd"><br> Check
-		Code:<input type="text" name="check_code"> <img
+	<form action="${pageContext.request.contextPath}/LogonFormServlet"
+		method="post">
+		User Name: <input type="text" name="username"><br>
+		Password: <input type="password" name="pwd"><br>
+		Check Code: <input type="text" name="check_code"> <img
 			src="${pageContext.request.contextPath}/CheckCodeServlet"><br>
+		Radonm Code: <input type="text" name="radom_code"><img
+			src="${pageContext.request.contextPath}/RandomCodeServlet"><br>
 		<input type="submit" value="Login"><br>
 	</form>
 </body>
