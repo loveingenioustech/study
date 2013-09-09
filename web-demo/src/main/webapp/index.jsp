@@ -11,6 +11,7 @@
     	<table>
     	<caption>Demo Table</caption>
     		<tr><td><a href="${pageContext.request.contextPath}/pages/login.jsp">Check Code</a></td></tr>
+    		<tr><td><a href="${pageContext.request.contextPath}/CountServlet">Count</a></td></tr>    		
     	</table>
     
         
