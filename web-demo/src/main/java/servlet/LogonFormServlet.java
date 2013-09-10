@@ -27,31 +27,42 @@ public class LogonFormServlet extends HttpServlet {
 	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.setContentType("text/html;charset=UTF-8");
-		
-		PrintWriter out = response.getWriter();
+		// response.setContentType("text/html;charset=UTF-8");
+		// PrintWriter out = response.getWriter();
+
+		String errorMsg = "";
+
 		HttpSession session = request.getSession();
 
 		if (session == null) {
-			out.println("Check Code handling error!!!is no");
-			return;
+			errorMsg = "Check Code handling error!!!is no";
+		} else {
+			String savedCode = (String) session.getAttribute("check_code");
+			if (savedCode == null) {
+				errorMsg = "Check Code handling error!!!";
+			}
+
+			String checkCode = (String) request.getParameter("check_code");
+			if (!savedCode.equals(checkCode)) {
+				errorMsg = "Invalid Check Code";
+			}
+
+			// Check Code passed, validate username and password
+			String username = request.getParameter("username");
+			String pwd = request.getParameter("pwd");
+
+			// Dummy validation
+			if (username.equals("robin") && pwd.equals("robin")) {
+				session.setAttribute("result", "ok");
+			} else {
+				session.setAttribute("result", "wrong");
+			}
+
+			// Remove check code
+			session.removeAttribute("check_code");
 		}
 
-		String savedCode = (String) session.getAttribute("check_code");
-		if (savedCode == null) {
-			out.println("Check Code handling error!!!");
-			return;
-		}
-
-		String checkCode = (String) request.getParameter("check_code");
-		if (!savedCode.equals(checkCode)) {
-			out.println("Invalid Check Code");
-			return;
-		}
-
-		session.removeAttribute("check_code");
-		out.println("Check Code passed!");
-
+		response.sendRedirect("pages/login.jsp");
 	}
 
 }
