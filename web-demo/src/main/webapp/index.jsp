@@ -3,17 +3,28 @@
    "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Home</title>
-    </head>
-    <body>
-    	<table>
-    	<caption>Demo Table</caption>
-    		<tr><td><a href="${pageContext.request.contextPath}/pages/login.jsp">Check Code</a></td></tr>
-    		<tr><td><a href="${pageContext.request.contextPath}/CountServlet">Count</a></td></tr>    		
-    	</table>
-    
-        
-    </body>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Home</title>
+</head>
+<body>
+	<center>
+		<table>
+			<caption>Demo Table</caption>
+			<tr>
+				<td align="left"><a
+					href="${pageContext.request.contextPath}/pages/login.jsp">Login</a></td>
+			</tr>
+			<tr>
+				<td align="left"><a
+					href="${pageContext.request.contextPath}/CountServlet">Count</a></td>
+			</tr>
+			<tr>
+				<td align="left"><a
+					href="${pageContext.request.contextPath}/pages/tip.jsp">Tip</a></td>
+			</tr>			
+		</table>
+	</center>
+
+</body>
 </html>
