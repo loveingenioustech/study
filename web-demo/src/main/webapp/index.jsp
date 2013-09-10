@@ -27,6 +27,10 @@
 				<td align="left"><a
 					href="${pageContext.request.contextPath}/pages/tip.jsp">Tip</a></td>
 			</tr>
+			<tr>
+				<td align="left"><a
+					href="${pageContext.request.contextPath}/pages/menu.jsp">Menu</a></td>
+			</tr>			
 		</table>
 	</center>
 
