@@ -27,24 +27,31 @@ public class LogonFormServlet extends HttpServlet {
 	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// response.setContentType("text/html;charset=UTF-8");
-		// PrintWriter out = response.getWriter();
+    	request.setCharacterEncoding("UTF-8");
 
-		String errorMsg = "";
+//		response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/xml; charset=UTF-8");
+        response.setHeader("Cache-Control", "no-cache");
+		
+		PrintWriter out = response.getWriter();
+
+		String loginMsg = "";
 
 		HttpSession session = request.getSession();
 
+		out.println("<response>");
+		
 		if (session == null) {
-			errorMsg = "Check Code handling error!!!is no";
+			loginMsg = "Check Code handling error!!!is no";
 		} else {
 			String savedCode = (String) session.getAttribute("check_code");
 			if (savedCode == null) {
-				errorMsg = "Check Code handling error!!!";
+				loginMsg = "Check Code handling error!!!";
 			}
 
 			String checkCode = (String) request.getParameter("check_code");
 			if (!savedCode.equals(checkCode)) {
-				errorMsg = "Invalid Check Code";
+				loginMsg = "Invalid Check Code";
 			}
 
 			// Check Code passed, validate username and password
@@ -53,16 +60,22 @@ public class LogonFormServlet extends HttpServlet {
 
 			// Dummy validation
 			if (username.equals("robin") && pwd.equals("robin")) {
-				session.setAttribute("result", "ok");
+				loginMsg = "OK";
+//				session.setAttribute("result", "ok");
 			} else {
-				session.setAttribute("result", "wrong");
+				loginMsg = "Wrong User Name or Password!";
+//				session.setAttribute("result", "wrong");
 			}
-
+			
+			out.println("<res>" + loginMsg + "</res>");
+			out.println("</response>");
+			out.close();
+			
 			// Remove check code
 			session.removeAttribute("check_code");
 		}
 
-		response.sendRedirect("pages/login.jsp");
+//		response.sendRedirect("pages/login.jsp");
 	}
 
 }
