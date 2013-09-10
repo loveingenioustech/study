@@ -10,7 +10,11 @@
 <body>
 	<center>
 		<table>
-			<caption>Demo Table</caption>
+			<caption>Demo List</caption>
+			<tr>
+				<td align="left"><a
+					href="${pageContext.request.contextPath}/pages/signUp.jsp">SignUp</a></td>
+			</tr>
 			<tr>
 				<td align="left"><a
 					href="${pageContext.request.contextPath}/pages/login.jsp">Login</a></td>
@@ -22,7 +26,7 @@
 			<tr>
 				<td align="left"><a
 					href="${pageContext.request.contextPath}/pages/tip.jsp">Tip</a></td>
-			</tr>			
+			</tr>
 		</table>
 	</center>
 
