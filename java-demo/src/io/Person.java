@@ -15,7 +15,20 @@ public class Person implements Serializable {
 
 	private transient int age;
 
+	private double salary;
+
+	private String married;
+
 	public Person() {
+	}
+
+	public Person(String name, char gender, int age, double salary,
+			String married) {
+		this.name = name;
+		this.gender = gender;
+		this.age = age;
+		this.salary = salary;
+		this.married = married;
 	}
 
 	public String getName() {
@@ -40,6 +53,22 @@ public class Person implements Serializable {
 
 	public void setAge(int age) {
 		this.age = age;
+	}
+
+	public double getSalary() {
+		return salary;
+	}
+
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
+
+	public String getMarried() {
+		return married;
+	}
+
+	public void setMarried(String married) {
+		this.married = married;
 	}
 
 	@Override
