@@ -1,6 +1,7 @@
 package performance;
 
-import java.util.concurrent.TimeUnit;
+import java.math.BigInteger;
+import java.util.Random;
 
 public class SpaceForTimeDemo {
 	
@@ -12,7 +13,26 @@ public class SpaceForTimeDemo {
 		spaceForTimeDemo.testNormalFactorial();
 
 		spaceForTimeDemo.testBetterFactorial();
+		
+		spaceForTimeDemo.testNormalBigFactorial();
 	}
+
+	private void testNormalBigFactorial() {		
+		long startTime = System.nanoTime();
+
+		Random random= new Random();
+		
+		for(int i = 0, n = 100; i< n ;i++){			
+			System.out.println(noramlBigCalc(BigInteger.valueOf(random.nextInt(10000))));
+		}	
+		
+		long endTime = System.nanoTime();
+		
+		System.out.println("------------------ Elapsed Seconds for testNormalBigFactorial: " + formatNano(endTime - startTime));
+		
+	}
+
+
 
 	private void testBetterFactorial() {		
 		long startTime = System.nanoTime();
@@ -23,12 +43,11 @@ public class SpaceForTimeDemo {
 		
 		long endTime = System.nanoTime();
 		
-		System.out.println("------------------ Elapsed Seconds: " + formatNano(endTime - startTime));	
+		System.out.println("------------------ Elapsed Seconds for testBetterFactorial: " + formatNano(endTime - startTime));	
 	}
 
 
-	private void testNormalFactorial() {
-		
+	private void testNormalFactorial() {		
 		long startTime = System.nanoTime();
 				
 		for(int i = 0, n = 10; i< n ;i++){
@@ -37,7 +56,7 @@ public class SpaceForTimeDemo {
 		
 		long endTime = System.nanoTime();
 		
-		System.out.println("------------------ Elapsed Seconds: " + formatNano(endTime - startTime));
+		System.out.println("------------------ Elapsed Seconds for testNormalFactorial: " + formatNano(endTime - startTime));
 	}
 
 	private double formatNano(long input) {
@@ -62,4 +81,12 @@ public class SpaceForTimeDemo {
 		return FACTORIAL_ARRAY[value];
 	}
 
+	private BigInteger noramlBigCalc(BigInteger value) {
+		if(value.compareTo(BigInteger.valueOf(0)) == 0){
+			return BigInteger.valueOf(1);
+		} else{
+			BigInteger nPlusOne = value.subtract(BigInteger.valueOf(1));
+			return noramlBigCalc(nPlusOne).multiply(value);			
+		}		
+	}
 }
