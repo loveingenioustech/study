@@ -1,12 +1,16 @@
 package performance;
 
 import java.math.BigInteger;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class SpaceForTimeDemo {
 	
 	private int[] FACTORIAL_ARRAY = new int[]{1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880};
 
+	private Map<BigInteger, BigInteger> map = new HashMap<BigInteger, BigInteger>(10000);
+	
 	public static void main(String[] args) {
 		SpaceForTimeDemo spaceForTimeDemo = new SpaceForTimeDemo();
 		
@@ -14,7 +18,25 @@ public class SpaceForTimeDemo {
 
 		spaceForTimeDemo.testBetterFactorial();
 		
+		// Test result: 89.406550248
 		spaceForTimeDemo.testNormalBigFactorial();
+		
+		// Test result: 48.99915683
+		spaceForTimeDemo.testBetterBigFactorial();
+	}
+
+	private void testBetterBigFactorial() {
+		long startTime = System.nanoTime();
+
+		Random random= new Random();
+		
+		for(int i = 0, n = 1000; i< n ;i++){			
+			System.out.println(betterBigCalc(BigInteger.valueOf(random.nextInt(10000))));
+		}	
+		
+		long endTime = System.nanoTime();
+		
+		System.out.println("------------------ Elapsed Seconds for testBetterBigFactorial: " + formatNano(endTime - startTime));
 	}
 
 	private void testNormalBigFactorial() {		
@@ -22,14 +44,13 @@ public class SpaceForTimeDemo {
 
 		Random random= new Random();
 		
-		for(int i = 0, n = 100; i< n ;i++){			
+		for(int i = 0, n = 1000; i< n ;i++){			
 			System.out.println(noramlBigCalc(BigInteger.valueOf(random.nextInt(10000))));
 		}	
 		
 		long endTime = System.nanoTime();
 		
-		System.out.println("------------------ Elapsed Seconds for testNormalBigFactorial: " + formatNano(endTime - startTime));
-		
+		System.out.println("------------------ Elapsed Seconds for testNormalBigFactorial: " + formatNano(endTime - startTime));		
 	}
 
 
@@ -89,4 +110,26 @@ public class SpaceForTimeDemo {
 			return noramlBigCalc(nPlusOne).multiply(value);			
 		}		
 	}
+	
+	private BigInteger betterBigCalc(BigInteger value) {
+		if(value.compareTo(BigInteger.valueOf(0)) == 0){
+			return BigInteger.valueOf(1);
+		} else{
+			// Load value from cache
+			BigInteger factor = (BigInteger) map.get(value);
+			
+			if(factor != null){
+				return factor;
+			}
+			
+			BigInteger nPlusOne = value.subtract(BigInteger.valueOf(1));
+			factor = betterBigCalc(nPlusOne).multiply(value);
+			
+			map.put(value, factor);
+			
+			return factor;			
+		}		
+
+	}
+
 }
