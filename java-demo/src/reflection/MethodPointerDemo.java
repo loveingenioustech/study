@@ -2,10 +2,10 @@ package reflection;
 
 import java.lang.reflect.*;
 
-public class MethodPointerTest {
+public class MethodPointerDemo {
 	public static void main(String[] args) throws Exception {
 		// get method pointers to the square and sqrt methods
-		Method square = MethodPointerTest.class.getMethod("square",
+		Method square = MethodPointerDemo.class.getMethod("square",
 				double.class);
 		Method sqrt = Math.class.getMethod("sqrt", double.class);
 
