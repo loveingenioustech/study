@@ -2,7 +2,7 @@ package collection;
 
 import java.util.*;
 
-public class ArraySortTest {
+public class ArraySortDemo {
 	public static void main(String[] args) {
 		Employee[] staff = new Employee[3];
 
