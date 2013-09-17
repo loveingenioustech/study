@@ -6,6 +6,48 @@ import java.util.concurrent.*;
 
 public class ThreadPoolDemo {
 	public static void main(String[] args) throws Exception {
+		ThreadPoolDemo threadPoolDemo = new ThreadPoolDemo();
+
+		threadPoolDemo.testFun();
+
+		threadPoolDemo.testSeachKeyword();
+	}
+
+	/**
+	 * A thread pool manages the pool of worker threads, it contains a queue
+	 * that keeps tasks waiting to get executed.
+	 * 
+	 * A thread pool manages the collection of Runnable threads and worker
+	 * threads execute Runnable from the queue.
+	 * 
+	 * pool-1-thread-1 Start. Command = 0 pool-1-thread-2 Start. Command = 1
+	 * pool-1-thread-5 Start. Command = 4 pool-1-thread-3 Start. Command = 2
+	 * pool-1-thread-4 Start. Command = 3 pool-1-thread-2 End. pool-1-thread-2
+	 * Start. Command = 5 pool-1-thread-1 End. pool-1-thread-1 Start. Command =
+	 * 6 pool-1-thread-5 End. pool-1-thread-5 Start. Command = 7 pool-1-thread-4
+	 * End. pool-1-thread-4 Start. Command = 8 pool-1-thread-3 End.
+	 * pool-1-thread-3 Start. Command = 9 pool-1-thread-2 End. pool-1-thread-1
+	 * End. pool-1-thread-5 End. pool-1-thread-4 End. pool-1-thread-3 End.
+	 * 
+	 * 
+	 */
+	private void testFun() {
+		ExecutorService executor = Executors.newFixedThreadPool(5);
+
+		for (int i = 0; i < 10; i++) {
+			Runnable worker = new DemoThread("" + i);
+			executor.execute(worker);
+		}
+
+		executor.shutdown();
+
+		while (!executor.isTerminated()) {
+		}
+
+		System.out.println("Finished all threads");
+	}
+
+	private void testSeachKeyword() {
 		Scanner in = new Scanner(System.in);
 		System.out.print("Enter base directory (e.g. /usr/local/jdk5.0/src): ");
 		String directory = in.nextLine();
