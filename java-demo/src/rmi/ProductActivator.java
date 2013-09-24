@@ -18,7 +18,8 @@ public class ProductActivator {
 
 			Properties props = new Properties();
 			// use the server.policy file in the current directory
-			File serverPolicy = new File("server.policy");
+			File serverPolicy = new File(ProductActivator.class.getResource(
+					"server.policy").getFile());
 
 			props.put("java.security.policy", serverPolicy.getCanonicalPath());
 			System.out.println("Load Server Policy: "
@@ -28,7 +29,7 @@ public class ProductActivator {
 
 			ActivationGroupID id = ActivationGroup.getSystem().registerGroup(
 					group);
-			
+
 			MarshalledObject p1param = new MarshalledObject("Blackwell Toaster");
 			MarshalledObject p2param = new MarshalledObject(
 					"ZapXpress Microwave Oven");
@@ -54,7 +55,7 @@ public class ProductActivator {
 			Context namingContext = new InitialContext();
 			namingContext.bind("rmi:toaster", p1);
 			namingContext.bind("rmi:microwave", p2);
-			
+
 			System.out.println("Exiting...");
 		} catch (Exception e) {
 			e.printStackTrace();
