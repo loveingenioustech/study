@@ -2,3 +2,5 @@
 *.ser
 *.dat
 /bin
+/target
+/target
