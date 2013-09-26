@@ -9,7 +9,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-public class TestCallable implements Callable<String> {
+public class CallableDemo implements Callable<String> {
 	@Override
 	public String call() throws Exception {
 		Thread.sleep(1000);
@@ -19,6 +19,12 @@ public class TestCallable implements Callable<String> {
 	}
 
 	public static void main(String args[]) {
+		// scenario1();
+
+		scenario2();
+	}
+
+	private static void scenario1() {
 		// Get ExecutorService from Executors utility class, thread pool size is
 		// 10
 		ExecutorService executor = Executors.newFixedThreadPool(10);
@@ -27,7 +33,7 @@ public class TestCallable implements Callable<String> {
 		List<Future<String>> list = new ArrayList<Future<String>>();
 
 		// Create MyCallable instance
-		Callable<String> callable = new TestCallable();
+		Callable<String> callable = new CallableDemo();
 
 		for (int i = 0; i < 100; i++) {
 			// submit Callable tasks to be executed by thread pool
@@ -50,5 +56,38 @@ public class TestCallable implements Callable<String> {
 		}
 		// shut down the executor service now
 		executor.shutdown();
+	}
+
+	private static void scenario2() {
+		ExecutorService exec = Executors.newCachedThreadPool();
+		ArrayList<Future<String>> results = new ArrayList<Future<String>>();
+
+		for (int i = 0; i < 10; i++)
+			results.add(exec.submit(new TaskWithResult(i)));
+
+		for (Future<String> fs : results)
+			try {
+				// get() blocks until completion:
+				System.out.println(fs.get());
+			} catch (InterruptedException e) {
+				System.out.println(e);
+				return;
+			} catch (ExecutionException e) {
+				System.out.println(e);
+			} finally {
+				exec.shutdown();
+			}
+	}
+}
+
+class TaskWithResult implements Callable<String> {
+	private int id;
+
+	public TaskWithResult(int id) {
+		this.id = id;
+	}
+
+	public String call() {
+		return "result of TaskWithResult " + id;
 	}
 }
