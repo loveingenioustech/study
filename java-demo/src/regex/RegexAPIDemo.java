@@ -20,7 +20,9 @@ public class RegexAPIDemo {
 
 		// demo.position();
 
-		demo.nest();
+		// demo.nest();
+
+		demo.replace();
 	}
 
 	private void create() {
@@ -82,5 +84,23 @@ public class RegexAPIDemo {
 			print(str);
 		}
 
+	}
+
+	private void replace() {
+		StringBuffer resultString = new StringBuffer();
+		Pattern outerRegex = Pattern.compile("<b>.*?</b>");
+		Pattern innerRegex = Pattern.compile("before");
+
+		CharSequence subjectString = "1 <b>2before</b> 3 4 <b>5 before6 7</b> HaHa";
+
+		Matcher outerMatcher = outerRegex.matcher(subjectString);
+		while (outerMatcher.find()) {
+			outerMatcher.appendReplacement(resultString,
+					innerRegex.matcher(outerMatcher.group())
+							.replaceAll("after"));
+		}
+		outerMatcher.appendTail(resultString);
+
+		print(resultString);
 	}
 }
