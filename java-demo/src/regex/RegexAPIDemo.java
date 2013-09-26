@@ -1,10 +1,13 @@
 package regex;
 
+import static util.Print.print;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
-
-import static util.Print.*;
 
 public class RegexAPIDemo {
 
@@ -15,7 +18,9 @@ public class RegexAPIDemo {
 
 		// demo.options();
 
-		demo.position();
+		// demo.position();
+
+		demo.nest();
 	}
 
 	private void create() {
@@ -53,6 +58,28 @@ public class RegexAPIDemo {
 			matchLength = regexMatcher.end() - matchStart;
 			print("matchStart: " + matchStart);
 			print("matchLength: " + matchLength);
+		}
+
+	}
+
+	private void nest() {
+		List<String> resultList = new ArrayList<String>();
+		Pattern outerRegex = Pattern.compile("<b>(.*?)</b>", Pattern.DOTALL);
+		Pattern innerRegex = Pattern.compile("\\d+");
+
+		String subjectString = "1 <b>2</b> 3 4 <b>5 6 7</b> HaHa";
+
+		Matcher outerMatcher = outerRegex.matcher(subjectString);
+		Matcher innerMatcher = innerRegex.matcher(subjectString);
+		while (outerMatcher.find()) {
+			innerMatcher.region(outerMatcher.start(), outerMatcher.end());
+			while (innerMatcher.find()) {
+				resultList.add(innerMatcher.group());
+			}
+		}
+
+		for (String str : resultList) {
+			print(str);
 		}
 
 	}
