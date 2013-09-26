@@ -22,7 +22,9 @@ public class RegexAPIDemo {
 
 		// demo.nest();
 
-		demo.replace();
+		// demo.replace();
+
+		demo.line();
 	}
 
 	private void create() {
@@ -102,5 +104,24 @@ public class RegexAPIDemo {
 		outerMatcher.appendTail(resultString);
 
 		print(resultString);
+	}
+
+	private void line() {
+		String subjectString = "Test 99 \n haaha\n 8";
+		String[] lines = subjectString.split("\r?\n");
+		// Then, iterate over the lines array:
+		Pattern regex = Pattern.compile("\\d+");
+		Matcher regexMatcher = regex.matcher("");
+
+		for (int i = 0; i < lines.length; i++) {
+			regexMatcher.reset(lines[i]);
+			if (regexMatcher.find()) {
+				// The regex matches lines[i]
+				print("Found in line: " + (i + 1));
+			} else {
+				// The regex does not match lines[i]
+				print("Not Found in line: " + (i + 1));
+			}
+		}
 	}
 }
