@@ -13,7 +13,9 @@ public class RegexAPIDemo {
 
 		// demo.create();
 
-		demo.options();
+		// demo.options();
+
+		demo.position();
 	}
 
 	private void create() {
@@ -42,4 +44,16 @@ public class RegexAPIDemo {
 
 	}
 
+	private void position() {
+		int matchStart, matchLength = -1;
+		Pattern regex = Pattern.compile("\\d+");
+		Matcher regexMatcher = regex.matcher("Hello 12345!!!");
+		if (regexMatcher.find()) {
+			matchStart = regexMatcher.start();
+			matchLength = regexMatcher.end() - matchStart;
+			print("matchStart: " + matchStart);
+			print("matchLength: " + matchLength);
+		}
+
+	}
 }
