@@ -1,0 +1,15 @@
+1. For slf4j-api and slf4j-no, don't use Eclipse maven plugin to get the libs. Use command-line to get them.
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-nop</artifactId>
+			<version>1.7.5</version>
+		</dependency>
+		
+2. hibernate.cfg.xml needs to be inside the src root directory		

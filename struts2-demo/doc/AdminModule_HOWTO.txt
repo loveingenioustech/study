@@ -1,0 +1,26 @@
+Admin Module
+============
+
+0. Stop your apache instance.  (if you don't the admin program below will give 
+   you database contention errors; this is a derby limitation.)
+1. Pull down all the current source from SVN and compile it with the build.xml 
+   at the top level.
+2. Go to the dist directory.  You should now see a JAR as well as a WAR file.  
+   Copy the bookmanager-admin.jar to the bin directory of apache.
+3. cd to the apache bin directory for the next four tasks.
+4. Remove the existing derby database with an rm -r booklook/
+5. Create the new database schema and add a user by typing 
+   "java -jar admin.jar adduser admin admin admin" 
+   (or whatever you want to use as a login/pw for the first two 
+   "admins" but make sure the third one is "admin" as this is the user type).
+6. Create a non-admin user by typing "java -jar admin.jar adduser user user user"
+   (again, whatever you want to use, and the user type isn't really checked if 
+   it's not 'admin' so you can use what you want for that, also)
+7. Start your apache instance.
+8. Log in with one of your two users.  If you use the admin login, you should get
+   the "add" item as well as the "list" item.  The other user should just get "list."
+9. You can also try logging in with an invalid user.  This should return you to the 
+   login screen with a message that your username or pw are incorrect.
+10. The admin program also has a "listusers" which you can run if apache isn't 
+    running. Just type "java -jar admin.jar listusers" to see the login, 
+    SHA-encrypted PW, and usertype for each user.

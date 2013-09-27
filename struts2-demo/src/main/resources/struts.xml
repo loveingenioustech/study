@@ -1,0 +1,76 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<package name="default" extends="struts-default">
+		<interceptors>
+			<interceptor name="checkAuthentication"
+				class="bookmanager.client.interceptor.LoginInterceptor" />
+			<interceptor-stack name="booklookDefaultStackNoAuth">
+				<interceptor-ref name="createSession" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+			<interceptor-stack name="booklookDefaultStack">
+				<interceptor-ref name="booklookDefaultStackNoAuth" />
+				<interceptor-ref name="checkAuthentication" />
+			</interceptor-stack>
+		</interceptors>
+
+		<default-interceptor-ref name="booklookDefaultStack" />
+
+		<global-results>
+			<result name="error">/error.jsp</result>
+			<result name="login">/login.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping
+				exception="org.apache.struts.register.exceptions.SecurityBreachException"
+				result="securityerror" />
+			<exception-mapping exception="java.lang.Exception"
+				result="error" />
+		</global-exception-mappings>
+
+		<action name="login" class="bookmanager.client.action.LoginAction">
+			<interceptor-ref name="booklookDefaultStackNoAuth" />
+			<result name="success">pages/bookmanager/welcome.jsp</result>
+			<result name="error">login.jsp</result>
+		</action>
+		<action name="about" class="bookmanager.client.action.AboutAction">
+			<result name="success">pages/bookmanager/about.jsp</result>
+		</action>
+		<action name="addbookscreen" class="bookmanager.client.action.AddBookScreenAction">
+			<result>pages/bookmanager/addbook.jsp</result>
+		</action>
+		<action name="addbook" class="bookmanager.client.action.AddBookAction">
+			<result name="success" type="redirectAction">listbooks</result>
+		</action>
+		<action name="listbooks" class="bookmanager.client.action.ListBooksAction">
+			<result>pages/bookmanager/listbooks.jsp</result>
+		</action>
+		<action name="exportascsv" class="bookmanager.client.action.ExportAsCSVAction">
+			<result name="success" type="stream">
+				<param name="pagesType">text/csv</param>
+				<param name="pagesDisposition">attachment;filename="booklist.csv"</param>
+			</result>
+		</action>
+		<action name="exportasxml" class="bookmanager.client.action.ExportAsXMLAction">
+			<result name="success" type="stream">
+				<param name="pagesType">text/xml</param>
+				<param name="pagesDisposition">attachment;filename="booklist.xml"</param>
+			</result>
+		</action>
+		<action name="editbookscreen" class="bookmanager.client.action.EditBookScreenAction">
+			<result>pages/bookmanager/editbook.jsp</result>
+		</action>
+		<action name="editbook" class="bookmanager.client.action.EditBookAction">
+			<result name="success" type="redirectAction">listbooks</result>
+		</action>
+		<action name="deletebook" class="bookmanager.client.action.DeleteBookAction">
+			<result name="success" type="redirectAction">listbooks</result>
+		</action>
+		<action name="logout" class="bookmanager.client.action.LogoutAction">
+			<interceptor-ref name="booklookDefaultStackNoAuth" />
+		</action>
+	</package>
+</struts>

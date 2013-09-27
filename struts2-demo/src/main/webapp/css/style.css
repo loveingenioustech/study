@@ -1,0 +1,87 @@
+body 
+{
+	margin-left:200px;
+  	background:#5d9ab2 no-repeat top left;
+	text-align: left;
+	font-family: "Calibri", "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+	vertical-align: middle;
+}
+
+table
+{
+	border-collapse:collapse;
+}
+
+table, th, td
+{
+	border: 0px solid #E6F7FF;
+	padding-left: 5px;
+}
+
+th
+{
+	background-color:#E6F7FF;
+}
+
+tr.even
+{
+	background-color:#E6E7FA;
+}
+
+tr.odd
+{
+	background-color:#9EA4F7;
+}
+
+a:link, a:visited
+{
+	font-weight:normal;
+	color:#FFFFFF;
+	background-color:#5d9ab2;
+	width:100px;
+	text-align:left;
+	padding:4px;
+	text-decoration:none;
+}
+
+a:hover, a:active
+{
+	background-color:#666;
+}
+
+.welcome 
+{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 60%;
+  height: 60%;
+  margin: auto;
+  background: #b0c4de;
+  border: 2px solid black;
+  padding: 5px; 
+  vertical-align: middle;
+} 
+
+.welcomelogin
+{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 40%;
+  height: 40%;
+  margin: auto;
+  background: #b0c4de;
+  border: 2px solid black;
+  padding: 5px; 
+ 
+} 
+
+ul.d 
+{
+	list-style-type:none;
+}

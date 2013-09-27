@@ -1,0 +1,37 @@
+admin.jar
+=========
+
+A simple utility for administering the users and their access to the Bookmanager 
+application, this JAR has a main class that accepts command-line input, and 
+makes static calls to a UserAdmin class which handles building the necessary 
+hibernate objects and adding or retrieving them from the Derby database via
+ Hibernate calls.
+
+Usage of Struts
+===============
+
+Struts2 has an interceptor feature, that allows a developer to process the 
+workflow of any struts request prior to it being served to the user. We added
+ a LoginInterceptor class to the existing chain of Struts interceptors 
+ (defined by the line "defaultStack") to check if a USER object is present 
+ in the HTTP session prior to each Struts action being served. If it is, 
+ we assume the user has authenticated via the login page and continue the user
+  onto his original requested action; if not, we bypass the original user's 
+  action and force him to the login.jsp page to enter his credentials. These 
+  credentials are sent to a LoginAction in Struts, which builds a BooklookUser 
+  object and queries the Derby database via Hibernate to see if the user's 
+  login and password are a match. If so, it creates USER session variable 
+  with a BookplaneUser Javabean object in it. This variable contains not only 
+  the user's login and SHA-encrypted password, but also his role. 
+
+Any user with a role of "admin" will be permitted to add and update book 
+information; all other user roles can only view the book list.
+
+To allow a user to Logout, we added a LogoutAction and links to it on each 
+page of the application. When a user selects this, his USER session variable 
+is deleted, which in turn forces the LoginInterceptor to return the user to 
+the login.jsp.
+
+Because the entire BackplaneUser object is present in the session, we can access it from inside each of the JSPs. We use this to add the user's loginname to a welcome message at the top of each screen in the application.
+
+The LoginInterceptor is configured to run by default on ALL actions except the login and logout actions--this is because if we were to force a check on the login during a login, we'd wind up in an infinite loop! We provide this "login-free path" for the login and logout by defining an alternate interceptor stack that does not contain the LoginInterceptor, and assigning that as the path for LoginAction and LogoutAction. All of this can be seen in the struts.xml.

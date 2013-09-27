@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class name="bookmanager.server.beans.Book" table="book">
+        <id name="book_id" column="book_id" type="long">
+      		<generator class="increment"/>
+		</id>
+        <property name="catalog" column="catalog" type="java.lang.String"/>
+        <property name="title" column="title" type="java.lang.String"/>
+        <property name="author" column="author" type="java.lang.String"/>
+        <property name="copyright" column="copyright" type="java.lang.Integer"/>
+        <property name="binding" column="binding" type="java.lang.String"/>
+        
+        <!--  <many-to-one name="author" class="server.beans.Author" column="author_id"/>   -->
+    </class>
+</hibernate-mapping>

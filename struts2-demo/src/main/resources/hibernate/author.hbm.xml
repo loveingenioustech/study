@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class name="bookmanager.server.beans.Author" table="author">
+        <id name="author_id" column="author_id" type="java.lang.Integer">
+            <generator class="sequence">
+                <param name="sequence">author_seq_value</param>
+            </generator>
+        </id>
+        <property name="lname" column="lname" type="java.lang.String"/>
+        <property name="fname" column="fname" type="java.lang.String"/>
+        <property name="yob" column="yob" type="java.lang.Integer"/>
+        <property name="yod" column="yod" type="java.lang.Integer"/>
+        
+        <!--  <many-to-one name="author" column="author_id" class="server.beans.Author"/>  -->
+    </class>
+</hibernate-mapping>
