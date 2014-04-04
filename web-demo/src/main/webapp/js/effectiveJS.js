@@ -184,3 +184,80 @@ function benchmark() {
 
 console.log(benchmark());
 // End
+
+/*
+Make Your Constructors new-Agnostic
+Document clearly when a function expects to be called with new 
+ */
+
+if (typeof Object.create === "undefined") {
+	Object.create = function(prototype) {
+		function C() {}
+		C.prototype = prototype;
+		return new C();
+	};
+}
+
+function User(name, passwordHash) {
+	var self = this instanceof User ? this : Object.create(User.prototype);
+	self.name = name;
+	self.passwordHash = passwordHash;
+	return self;
+}
+
+var x = User("baravelli", "d8b74df393528d51cd19980ae0aa028e");
+var y = new User("baravelli", "d8b74df393528d51cd19980ae0aa028e");
+console.log(x);
+console.log(x instanceof User);
+console.log(y);
+console.log(y instanceof User);
+// End
+
+/*
+ 
+ */
+function CSVReader(separators) {
+	this.separators = separators || [","];
+	this.regexp =
+		new RegExp(this.separators.map(function(sep) {
+			return "\\" + sep[0];
+		}).join("|"));
+}
+
+// Solution 1
+// Take advantage of the fact that the mapmethod of arrays takes an optional 
+// second argument to use as a this-binding for the callback
+/*
+CSVReader.prototype.read = function(str) {
+	var lines = str.trim().split(/\n/);
+	return lines.map(function(line) {
+		return line.split(this.regexp);
+	}, this); // forward outer this-binding to callback
+};
+*/
+
+// Solution 2
+// Use a local variable, usually called self, me, or that, to make a 
+// this-binding available to inner functions.
+/*
+CSVReader.prototype.read = function(str) {
+	var lines = str.trim().split(/\n/);
+	var self = this; // save a reference to outer this-binding
+	return lines.map(function(line) {
+		return line.split(self.regexp); // use outer this
+	});
+};
+*/
+
+// Solution 3
+// ES5 is to use the callback function’s bindmethod
+CSVReader.prototype.read = function(str) {
+	var lines = str.trim().split(/\n/);
+	return lines.map(function(line) {
+		return line.split(this.regexp);
+	}.bind(this)); // bind to outer this-binding
+};
+
+var reader = new CSVReader();
+console.log(reader.read("a,b,c\nd,e,f\n"));
+// End
