@@ -75,7 +75,7 @@ h2 { margin: 34px 0 13px; }
         box-shadow: none;
         background: none;
         position: relative;
-        background: url(../img/time.png);
+        background: url(../images/time.png);
     }
         #time123:before {
             top: 0;

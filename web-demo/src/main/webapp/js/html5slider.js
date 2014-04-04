@@ -248,7 +248,7 @@ function transform(slider) {
       return;
     prevValue = value;
     var position = range ? (value - min) / range * 100 : 0;
-    var bg = 'url(img/sliderThumb.png) ' + position + '% 3px no-repeat, ';
+    var bg = 'url(../images/sliderThumb.png) ' + position + '% 3px no-repeat, ';
     style(slider, { background: bg + track });
   }
 
