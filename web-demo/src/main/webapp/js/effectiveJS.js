@@ -261,3 +261,147 @@ CSVReader.prototype.read = function(str) {
 var reader = new CSVReader();
 console.log(reader.read("a,b,c\nd,e,f\n"));
 // End
+
+/*
+In ES5, use  Object.create(null)to create prototype-free empty 
+objects that are less susceptible to pollution.
+*/
+var x = Object.create(null);
+console.log(Object.getPrototypeOf(x) === null); // true
+// End
+
+/*
+Use hasOwnPropertyto protect against prototype pollution. 
+ */
+function Dict(elements) {
+	// allow an optional initial table
+	this.elements = elements || {}; // simple Object
+	this.hasSpecialProto = false; // has "__proto__" key?
+	this.specialProto = undefined; // "__proto__" element
+}
+Dict.prototype.has = function(key) {
+	if (key === "__proto__") {
+		return this.hasSpecialProto;
+	}
+	// own property only
+	return {}.hasOwnProperty.call(this.elements, key);
+};
+Dict.prototype.get = function(key) {
+	if (key === "__proto__") {
+		return this.specialProto;
+	}
+	// own property only
+	return this.has(key) ? this.elements[key] : undefined;
+};
+Dict.prototype.set = function(key, val) {
+	if (key === "__proto__") {
+		this.hasSpecialProto = true;
+		this.specialProto = val;
+	} else {
+		this.elements[key] = val;
+	}
+};
+Dict.prototype.remove = function(key) {
+	if (key === "__proto__") {
+		this.hasSpecialProto = false;
+		this.specialProto = undefined;
+	} else {
+		delete this.elements[key];
+	}
+};
+
+
+var dict = new Dict({
+	alice: 34,
+	bob: 24,
+	chris: 62
+});
+console.log(dict.has("alice")); // true
+console.log(dict.get("bob")); // 24
+console.log(dict.has("valueOf")); // false
+console.log(dict.has("__proto__")); // false
+// End
+
+
+/*
+Avoid adding properties to Object.prototype.
+Consider writing a function instead of an Object.prototypemethod.
+If you do add properties to  Object.prototype, use ES5’s 
+Object.definePropertyto define them as nonenumerable properties. 
+ */
+Object.defineProperty(Object.prototype, "allKeys", {
+	value: function() {
+		var result = [];
+		for (var key in this) {
+			result.push(key);
+		}
+		return result;
+	},
+	writable: true,
+	enumerable: false,
+	configurable: true
+});
+console.log(({
+	a: 1,
+	b: 2,
+	c: 3
+}).allKeys());
+// End
+
+/*
+Use iteration methods such as Array.prototype.forEachand 
+Array.prototype.mapin place of forloops to make code more readable and avoid duplicating loop control logic.
+ */
+var input = ['a ', 'b ', ' c'];
+var trimmed = [];
+for (var i = 0, n = input.length; i < n; i++) {
+	trimmed.push(input[i].trim());
+}
+console.log(trimmed);
+
+trimmed = [];
+input.forEach(function(s) {
+	trimmed.push(s.trim());
+});
+console.log(trimmed);
+
+trimmed = input.map(function(s) {
+	return s.trim();
+});
+console.log(trimmed);
+// End
+
+/*
+Reuse generic Arraymethods on array-like objects by extracting 
+method objects and using their callmethod.
+Any object can be used with generic Arraymethods if it has indexed 
+properties and an appropriate lengthproperty. 
+ */
+function highlight() {
+	[].forEach.call(arguments, function(widget) {
+		widget.setBackground("yellow");
+	});
+}
+
+var arrayLike = {
+	0: "a",
+	1: "b",
+	2: "c",
+	length: 3
+};
+var result = Array.prototype.map.call(arrayLike, function(s) {
+	return s.toUpperCase();
+}); // ["A", "B", "C"]
+console.log(result);
+
+result = Array.prototype.map.call("abc", function(s) {
+	return s.toUpperCase();
+}); // ["A", "B", "C"]
+console.log(result);
+
+function namesColumn() {
+	return ["Names"].concat([].slice.call(arguments));
+}
+console.log(namesColumn("Alice", "Bob", "Chris"));
+// ["Names", "Alice", "Bob", "Chris"]
+// End
