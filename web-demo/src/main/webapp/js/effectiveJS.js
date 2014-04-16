@@ -405,3 +405,94 @@ function namesColumn() {
 console.log(namesColumn("Alice", "Bob", "Chris"));
 // ["Names", "Alice", "Bob", "Chris"]
 // End
+
+/*
+Test for undefinedinstead of checking arguments.length to provide 
+parameter default values.
+ */
+function Element(width, height) {
+	this.width = width === undefined ? 320 : width;
+	this.height = height === undefined ? 240 : height;
+	// ...
+}
+var c1 = new Element(0, 0);
+console.log(c1.width); // 0
+console.log(c1.height); // 0
+
+var c2 = new Element();
+console.log(c2.width); // 320
+console.log(c2.height); // 240
+// End
+
+/*
+Use options objects to make APIs more readable and memorable.
+The arguments provided by an options object should all be treated 
+as optional.
+Use an extendutility function to abstract out the logic of extracting 
+values from options objects. 
+ */
+function extend(target, source) {
+	if (source) {
+		for (var key in source) {
+			var val = source[key];
+			if (typeof val !== "undefined") {
+				target[key] = val;
+			}
+		}
+	}
+	return target;
+}
+
+function Alert(parent, message, opts) {
+	opts = extend({
+		width: 320,
+		height: 240
+	});
+	opts = extend({
+		x: (parent.width / 2) - (opts.width / 2),
+		y: (parent.height / 2) - (opts.height / 2),
+		title: "Alert",
+		titleColor: "gray",
+		bgColor: "white",
+		textColor: "black",
+		icon: "info",
+		modal: false
+	}, opts);
+	extend(this, opts);
+}
+
+var alert = new Alert('', 'test', {
+	width: 150,
+	height: 100,
+	title: "Error",
+	titleColor: "blue",
+	bgColor: "white",
+	textColor: "black",
+	icon: "error",
+	modal: true
+});
+console.log(alert);
+// End
+
+/*
+Use ES5’s Array.isArrayto test for true arrays. 
+ */
+var toString = Object.prototype.toString;
+
+function isArray(x) {
+	return toString.call(x) === "[object Array]";
+}
+// End
+
+/*
+Support Method Chaining
+*/
+function escapeBasicHTML(str) {
+	return str.replace(/&/g, "&amp;")
+		.replace(/</g, "&lt;")
+		.replace(/>/g, "&gt;")
+		.replace(/"/g, "&quot;")
+		.replace(/'/g, "&apos;");
+}
+
+// End
