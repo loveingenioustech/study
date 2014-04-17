@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Manage HR Lister Application Deployment" default="build-all" basedir=".">
+	<echo message="pulling in property files" />
+	<property file="ws_ant.properties" />
+
+	<!-- global properties -->
+	<property name="appName" value="HRListerEAR" />
+	<property name="deployEar" value="HRListerEAR.ear" />
+
+	<!-- mbean declarations" -->
+	<taskdef name="wsUninstallApp" classname="com.ibm.websphere.ant.tasks.UninstallApplication" />
+	<taskdef name="wsInstallApp" classname="com.ibm.websphere.ant.tasks.InstallApplication" />
+	<taskdef name="wsListApplications" classname="com.ibm.websphere.ant.tasks.ListApplications" />
+
+	<!-- List Target-->
+	<target name="listApplications">
+		<wsListApplications wasHome="${wasHome.dir}" conntype="${connType}" port="${port}" host="${hostName}" user="${userId}" password="${password}" />
+	</target>
+
+	<!-- Uninstall Target-->
+	<target name="uninstallEAR">
+		<wsUninstallApp application="${appName}" wasHome="${wasHome.dir}" conntype="${connType}" port="${port}" host="${hostName}" user="${userId}" password="${password}" />
+	</target>
+
+	<!-- installation Target-->
+	<target name="installEAR">
+		<echo message="Deployable EAR File found at: ${deployEar.dir}/${deployEar}" />
+		<wsInstallApp ear="${deployEar.dir}/${deployEar}" options="-appname ${appName}" wasHome="${wasHome.dir}" conntype="${connType}" port="${port}" host="${hostName}" user="${userId}" password="${password}" />
+	</target>
+
+	<target name="build-all" depends="listApplications, uninstallEAR, listApplications, installEAR, listApplications">
+		<!--Main Target-->
+	</target>
+
+</project>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<project name="HR Lister Application Depoyment" default="build-all" basedir=".">
+
+	<echo message="pulling in property files" />
+	<property file="ws_ant.properties" />
+
+	<!-- global properties -->
+	<property name="deployEar" value="HRListerEAR.ear" />
+
+	<!-- mbean declaration" -->
+	<taskdef name="wasInstallApp" classname="com.ibm.websphere.ant.tasks.InstallApplication" />
+
+	<!-- installation Target-->
+	<target name="installEar">
+		<echo message="Deployable EAR File found at: ${deployEar.dir}/${deployEar}" />
+		<wasInstallApp ear="${deployEar.dir}/${deployEar}" wasHome="${wasHome.dir}" conntype="${connType}" port="${port}" host="${hostName}" user="${userId}" password="${password}" />
+	</target>
+	<target name="build-all" depends="installEar">
+		<!--Main Target-->
+	</target>
+</project>

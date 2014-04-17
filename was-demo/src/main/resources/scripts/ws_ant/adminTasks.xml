@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<project name="WAS Admin Tasks" default="listApps" basedir=".">
+
+	<echo message="pulling in property files" />
+	<property file="ws_ant.properties" />
+
+	<!-- global properties -->
+
+	<!-- mbean declaration" -->
+	<taskdef name="wasListApps" classname="com.ibm.websphere.ant.tasks.ListApplications" />
+	<taskdef name="wasServerStatus" classname="com.ibm.websphere.ant.tasks.ServerStatus" />
+	<taskdef name="wasStartServer" classname="com.ibm.websphere.ant.tasks.StartServer" />
+	<taskdef name="wasStopServer" classname="com.ibm.websphere.ant.tasks.StopServer" />
+	<taskdef name="wasStartApplication" classname="com.ibm.websphere.ant.tasks.StartApplication" />
+	<taskdef name="wasStopApplication" classname="com.ibm.websphere.ant.tasks.StopApplication" />	
+		
+	<!-- List Applications-->
+	<target name="listApps">
+		<!--Main Target-->
+	</target>
+</project>

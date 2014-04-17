@@ -1,0 +1,4 @@
+
+ws_ant -f C:\Dev\GitRepos\Study\was-demo\src\main\resources\scripts\ws_ant\deployHR.xml
+ws_ant -f C:\Dev\GitRepos\Study\was-demo\src\main\resources\scripts\ws_ant\adminTasks.xml
+ws_ant listApplications -f C:\Dev\GitRepos\Study\was-demo\src\main\resources\scripts\ws_ant\manageHR.xml
