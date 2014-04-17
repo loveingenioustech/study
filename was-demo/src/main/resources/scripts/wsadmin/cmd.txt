@@ -1,0 +1,10 @@
+wsadmin.bat –lang jython
+cscript.exe //Nologo C:\Dev\GitRepos\Study\was-demo\src\main\resources\scripts\wsadmin\listapps.vbs
+
+
+wsadmin.bat -lang jython –username wasadmin –password wasadmin -profile C:\Dev\GitRepos\Study\was-demo\src\main\resources\scripts\wsadmin\profileScript.py
+wsadmin.bat -lang jython –username wasadmin –password wasadmin -profile C:\Dev\GitRepos\Study\was-demo\src\main\resources\scripts\wsadmin\listApplications.py
+wsadmin.bat -lang jython –username wasadmin –password wasadmin -profile C:\Dev\GitRepos\Study\was-demo\src\main\resources\scripts\wsadmin\uninstallApp.py
+wsadmin.bat -lang jython –username wasadmin –password wasadmin -profile C:\Dev\GitRepos\Study\was-demo\src\main\resources\scripts\wsadmin\installApp.py
+
+wsadmin.bat -lang jython –username wasadmin –password wasadmin -profile C:\Dev\GitRepos\Study\was-demo\src\main\resources\scripts\wsadmin\iterateApps.py
