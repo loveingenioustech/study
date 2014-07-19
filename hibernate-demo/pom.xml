@@ -46,6 +46,21 @@
 			<artifactId>ojdbc6</artifactId>
 			<version>11.2.0.2.0</version>
 		</dependency>
+
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>tomcat-web-api</artifactId>
+			<version>6.0</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.1</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>		
 	</dependencies>
 
 	<build>
