@@ -1,5 +1,11 @@
 package lock;
 
+/*
+ * tasklist | FIND "java"
+ * ps -eaf | grep java
+ * jstack 9616 >> C:\temp\dump.log
+ * 
+ */
 public class TestDeadLock {
 
 	public static void main(String[] args) throws InterruptedException {
@@ -100,9 +106,9 @@ class SafeSyncThread implements Runnable {
 
 	/**
 	 * Avoid Nested Locks: This is the most common reason for deadlocks, avoid
-	 * locking another resource if you already hold one. It’s almost impossible
-	 * to get deadlock situation if you are working with only one object lock.
-	 * For example, here is the another implementation of run() method without
+	 * locking another resource if you already hold one. It almost impossible to
+	 * get deadlock situation if you are working with only one object lock. For
+	 * example, here is the another implementation of run() method without
 	 * nested lock and program runs successfully without deadlock situation.
 	 */
 	@Override
