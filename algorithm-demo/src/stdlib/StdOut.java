@@ -221,6 +221,14 @@ public final class StdOut {
 		out.flush();
 	}
 
+	public static void print(List list) {
+		for (Object o : list) {
+			out.println(o);
+		}
+
+		out.flush();
+	}
+
 	/**
 	 * Print a formatted string to standard output using the specified format
 	 * string and arguments, and flush standard output.
