@@ -12,6 +12,7 @@ public class ReverseDemo {
 		StdOut.println("inPlaceReverse: " + demo.inPlaceReverse(originalText));
 		StdOut.println("nativeReverse: " + demo.nativeReverse(originalText));
 
+		demo.reverseLinkedList();
 	}
 
 	public String reverse(final String s) {
@@ -35,6 +36,20 @@ public class ReverseDemo {
 
 	public String nativeReverse(final String s) {
 		return new StringBuilder(s).reverse().toString();
+	}
+
+	public void reverseLinkedList() {
+		final ReverseLinkedList<String> three = new ReverseLinkedList<String>(
+				"3", null);
+		final ReverseLinkedList<String> two = new ReverseLinkedList<String>(
+				"2", three);
+		final ReverseLinkedList<String> one = new ReverseLinkedList<String>(
+				"1", two);
+		final ReverseLinkedList<String> reversed = ReverseLinkedList
+				.reverse(one);
+		StdOut.println(reversed.getElement());
+		StdOut.println(reversed.getNext().getElement());
+		StdOut.println(reversed.getNext().getNext().getElement());
 	}
 
 }
