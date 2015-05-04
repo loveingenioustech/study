@@ -1,1 +1,4 @@
 *.class
+*.classpath
+*.mymetadata
+*.project
