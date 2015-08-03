@@ -3,12 +3,5 @@
 *.mymetadata
 *.project
 *.classpath
-web-demo/.project
 *.prefs
-web-demo/.settings/org.eclipse.wst.common.component
-web-demo/.settings/org.eclipse.wst.common.component
-web-demo/.settings/org.eclipse.core.resources.prefs
-*.project
-*.classpath
-*.classpath
-performance-demo/.project
+/.settings

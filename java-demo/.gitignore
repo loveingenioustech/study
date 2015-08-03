@@ -3,4 +3,4 @@
 *.dat
 /bin
 /target
-/target
+/.settings
