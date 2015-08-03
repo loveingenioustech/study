@@ -2,3 +2,7 @@
 *.classpath
 *.mymetadata
 *.project
+*.classpath
+web-demo/.project
+*.prefs
+web-demo/.settings/org.eclipse.wst.common.component
